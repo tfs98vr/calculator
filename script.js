@@ -54,22 +54,30 @@ const operate = function() {
     if (operation.operatorValue[operation.operatorValue.length - 1] === '+') {
         let result = addition().toString();
         clearAll();
-        operation.first.push(result);
+        for (i = 0; i < result.length; i++) {
+            operation.first.push(result[i]);
+        }
         display.textContent = operation.first.join('') + operation.operatorValue.slice(operation.operatorValue.length - 1) + operation.second.join('');
     } else if (operation.operatorValue[operation.operatorValue.length - 1] === '-') {
         let result = subtraction().toString();
         clearAll();
-        operation.first.push(result);
+        for (i = 0; i < result.length; i++) {
+            operation.first.push(result[i]);
+        }
         display.textContent = operation.first.join('') + operation.operatorValue.slice(operation.operatorValue.length - 1) + operation.second.join('');
     } else if (operation.operatorValue[operation.operatorValue.length - 1] === '*') {
         let result = multiplication().toString();
         clearAll();
-        operation.first.push(result);
+        for (i = 0; i < result.length; i++) {
+            operation.first.push(result[i]);
+        }
         display.textContent = operation.first.join('') + operation.operatorValue.slice(operation.operatorValue.length - 1) + operation.second.join('');
     } else if (operation.operatorValue[operation.operatorValue.length - 1] === '/') {
         let result = division().toString();
         clearAll();
-        operation.first.push(result);
+        for (i = 0; i < result.length; i++) {
+            operation.first.push(result[i]);
+        }
         display.textContent = operation.first.join('') + operation.operatorValue.slice(operation.operatorValue.length - 1) + operation.second.join('');
     }
 }
