@@ -138,3 +138,38 @@ clear.addEventListener('click', function() {
 erase.addEventListener('click', function() {
     backspace();
 })
+
+document.addEventListener('keydown', function(e) {
+    if (isNaN(parseInt(e.key)) === false) {
+        operation.operatorValue.length === 0 ? operation.first.push(e.key) : operation.second.push(e.key);
+        display.textContent = operation.first.join('') + operation.operatorValue.slice(operation.operatorValue.length - 1) + operation.second.join('');     
+    } else if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+        if (operation.first.length === 0 && e.key === '-') {
+            operation.first.push(e.key);
+            display.textContent = operation.first.join('') + operation.operatorValue.slice(operation.operatorValue.length - 1) + operation.second.join('');      
+        } else if ((operation.first[0] === '-' && operation.first.length > 1 && operation.second.length < 1) || (operation.first[0] != '-' && operation.first.length > 0 && operation.second.length < 1)) {
+            operation.operatorValue.push(e.key);
+            display.textContent = operation.first.join('') + operation.operatorValue.slice(operation.operatorValue.length - 1) + operation.second.join('');
+        } else if (operation.first.length > 0 && operation.operatorValue.length > 0 && operation.second.length > 0) {
+            operate();
+            operation.operatorValue.push(e.key);
+            display.textContent = operation.first.join('') + operation.operatorValue.slice(operation.operatorValue.length - 1) + operation.second.join('');
+        }
+    } else if (e.key === '.') {
+        if (operation.first[0] === '-' && operation.first.length === 1 && operation.operatorValue.length === 0) {
+            return
+        } else if (operation.first[0] === undefined) {
+            return
+        } else if(operation.first.indexOf('.') === -1 && operation.first[0].indexOf('.') === -1 && operation.operatorValue.length === 0) {
+            operation.first.push(e.key);
+            display.textContent = operation.first.join('') + operation.operatorValue.slice(operation.operatorValue.length - 1) + operation.second.join('');
+        } else if (operation.second.indexOf('.') === -1 && operation.operatorValue.length > 0 && operation.second.length > 0) {
+            operation.second.push(e.key);
+            display.textContent = operation.first.join('') + operation.operatorValue.slice(operation.operatorValue.length - 1) + operation.second.join('');
+        }
+    } else if (e.key === 'Enter') {
+        operate();
+    } else if (e.key === 'Backspace') {
+        backspace();
+    }  
+})
