@@ -39,9 +39,14 @@ const multiplication = function() {
 const division = function() {
     let a = parseFloat(operation.first.join(''));
     let b = parseFloat(operation.second.join(''));
-    let result = a / b;
-    let resultRounded = Math.round((result + Number.EPSILON) * 100) / 100;
-    return resultRounded;
+    if (b === 0) {
+        let result = "Try with other number!"
+        return result
+    } else {
+        let result = a / b;
+        let resultRounded = Math.round((result + Number.EPSILON) * 100) / 100;
+        return resultRounded;
+    }    
 }
 
 const clearAll = function() {
@@ -75,11 +80,15 @@ const operate = function() {
     } else if (operation.operatorValue[operation.operatorValue.length - 1] === '/') {
         let result = division().toString();
         clearAll();
-        for (i = 0; i < result.length; i++) {
-            operation.first.push(result[i]);
+        if (result === "Try with other number!") {
+            display.textContent = result;
+        } else {
+            for (i = 0; i < result.length; i++) {
+                operation.first.push(result[i]);
+            }
+            display.textContent = operation.first.join('') + operation.operatorValue.slice(operation.operatorValue.length - 1) + operation.second.join('');   
         }
-        display.textContent = operation.first.join('') + operation.operatorValue.slice(operation.operatorValue.length - 1) + operation.second.join('');
-    }
+    }        
 }
 
 const backspace = function() {
